@@ -1,0 +1,18 @@
+name: maro-bot
+services:
+  - name: maro-bot
+    type: worker
+    git:
+      repository: github.com/omrm9962-afk/maro-bot
+      branch: main
+    build:
+      buildpack:
+        build_command: npm install
+        run_command: node index.js
+    env:
+      - key: BOT_TOKEN
+        value: ""
+      - key: ADMIN_ID
+        value: ""
+    instance_types:
+      - type: nano

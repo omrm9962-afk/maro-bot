@@ -375,6 +375,7 @@ bot.action(/ver_(.+)_(.+)/, async (ctx) => {
         });
         
         const zipPath = path.join(TEMP_BASE, `${libName}-${version}.zip`);
+        const nodeModulesDir = path.join(tempDir, 'node_modules');
         const output = fsSync.createWriteStream(zipPath);
         const archive = archiver('zip', { zlib: { level: 9 } });
         
@@ -382,14 +383,14 @@ bot.action(/ver_(.+)_(.+)/, async (ctx) => {
             output.on('close', resolve);
             archive.on('error', reject);
             archive.pipe(output);
-            archive.directory(tempDir, false);
+            archive.directory(nodeModulesDir, 'node_modules');
             archive.finalize();
         });
         
         const msg = await sendZipFile(
             ctx,
             zipPath,
-            `${libName}-${version}.zip`,
+            `node_modules.zip`,
             `${config.strings[lang].success}\n\n👑 Developer: MARO\n📦 Library: ${libName}@${version}`
         );
         
@@ -451,6 +452,7 @@ bot.on('document', async (ctx) => {
         });
         
         const zipPath = path.join(TEMP_BASE, `package_${userId}_${Date.now()}.zip`);
+        const nodeModulesDir = path.join(tempDir, 'node_modules');
         const output = fsSync.createWriteStream(zipPath);
         const archive = archiver('zip', { zlib: { level: 9 } });
         
@@ -458,14 +460,14 @@ bot.on('document', async (ctx) => {
             output.on('close', resolve);
             archive.on('error', reject);
             archive.pipe(output);
-            archive.directory(tempDir, false);
+            archive.directory(nodeModulesDir, 'node_modules');
             archive.finalize();
         });
         
         const msg = await sendZipFile(
             ctx,
             zipPath,
-            `modules-${Date.now()}.zip`,
+            `node_modules.zip`,
             `${config.strings[lang].success}\n\n👑 Developer: MARO`
         );
         

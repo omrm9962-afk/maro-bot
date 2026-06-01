@@ -101,6 +101,56 @@ cron.schedule('0 0 * * *', () => {
 });
 
 // ============== HELPERS ==============
+const MAX_TG_SIZE = 45 * 1024 * 1024; // 45MB — Telegram limit is 50MB
+
+async function sendZipFile(ctx, zipPath, filename, caption) {
+    const { size } = fsSync.statSync(zipPath);
+    
+    if (size <= MAX_TG_SIZE) {
+        return await ctx.replyWithDocument({ source: zipPath, filename }, { caption });
+    }
+    
+    // Split into parts
+    const partSize = MAX_TG_SIZE;
+    const totalParts = Math.ceil(size / partSize);
+    const partPaths = [];
+    
+    log(`📦 File too large (${(size/1024/1024).toFixed(1)}MB), splitting into ${totalParts} parts`, 'info');
+    
+    await ctx.reply(
+        `📦 الملف كبير (${(size/1024/1024).toFixed(1)}MB)\n` +
+        `✂️ هيتبعتلك ${totalParts} أجزاء — ادمجهم بعدين:\n` +
+        `\`cat part1 part2 ... > full.zip\``,
+        { parse_mode: 'Markdown' }
+    );
+    
+    const fileHandle = fsSync.openSync(zipPath, 'r');
+    try {
+        for (let i = 0; i < totalParts; i++) {
+            const partPath = `${zipPath}.part${i + 1}`;
+            const buffer = Buffer.alloc(Math.min(partSize, size - i * partSize));
+            fsSync.readSync(fileHandle, buffer, 0, buffer.length, i * partSize);
+            fsSync.writeFileSync(partPath, buffer);
+            partPaths.push(partPath);
+            
+            const partFilename = `${filename.replace('.zip', '')}_part${i + 1}of${totalParts}.zip`;
+            await ctx.replyWithDocument(
+                { source: partPath, filename: partFilename },
+                { caption: `📦 Part ${i + 1}/${totalParts} — ${(buffer.length/1024/1024).toFixed(1)}MB` }
+            );
+            log(`📤 Sent part ${i + 1}/${totalParts}`, 'info');
+        }
+    } finally {
+        fsSync.closeSync(fileHandle);
+        for (const p of partPaths) {
+            if (fsSync.existsSync(p)) fsSync.unlinkSync(p);
+        }
+    }
+    
+    // Return a dummy msg object for compatibility
+    return null;
+}
+
 async function deleteFileAfterDelay(filePath, userId, messageId, delayMs = 3 * 60 * 60 * 1000) {
     setTimeout(async () => {
         try {
@@ -336,11 +386,14 @@ bot.action(/ver_(.+)_(.+)/, async (ctx) => {
             archive.finalize();
         });
         
-        const msg = await ctx.replyWithDocument({ source: zipPath, filename: `${libName}-${version}.zip` }, {
-            caption: `${config.strings[lang].success}\n\n👑 Developer: MARO\n📦 Library: ${libName}@${version}`
-        });
+        const msg = await sendZipFile(
+            ctx,
+            zipPath,
+            `${libName}-${version}.zip`,
+            `${config.strings[lang].success}\n\n👑 Developer: MARO\n📦 Library: ${libName}@${version}`
+        );
         
-        deleteFileAfterDelay(zipPath, userId, msg.message_id);
+        deleteFileAfterDelay(zipPath, userId, msg?.message_id);
         
         setTimeout(async () => {
             await fs.rm(tempDir, { recursive: true, force: true });
@@ -409,11 +462,14 @@ bot.on('document', async (ctx) => {
             archive.finalize();
         });
         
-        const msg = await ctx.replyWithDocument({ source: zipPath, filename: `modules-${Date.now()}.zip` }, {
-            caption: `${config.strings[lang].success}\n\n👑 Developer: MARO`
-        });
+        const msg = await sendZipFile(
+            ctx,
+            zipPath,
+            `modules-${Date.now()}.zip`,
+            `${config.strings[lang].success}\n\n👑 Developer: MARO`
+        );
         
-        deleteFileAfterDelay(zipPath, userId, msg.message_id);
+        deleteFileAfterDelay(zipPath, userId, msg?.message_id);
         
         setTimeout(async () => {
             await fs.rm(tempDir, { recursive: true, force: true });

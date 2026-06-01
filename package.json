@@ -1,0 +1,37 @@
+{
+  "name": "maro-ultra-modules-bot",
+  "version": "2.0.0",
+  "description": "MARO ULTRA MODULES BOT - Download and pack NPM libraries with 3 languages support",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "pm2": "pm2 start index.js --name maro-bot",
+    "stop": "pm2 stop maro-bot"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "npm",
+    "downloader",
+    "modules",
+    "maro"
+  ],
+  "author": "MARO (@ANM_IV)",
+  "license": "MIT",
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "axios": "^1.7.2",
+    "archiver": "^7.0.1",
+    "node-cron": "^3.0.3",
+    "woke-dyno": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "botToken": "8630030362:AAEjzEzwaYVmgdHXq5ZCoECDmldSuBKxjYQ",
+  "adminId": 7697500717,
+  "channels": [
+    {"id": "@maro_chat12", "url": "https://t.me/maro_chat12", "name": "📢 MARO CHAT"},
+    {"id": "@MARO_EMPOSTER", "url": "https://t.me/MARO_EMPOSTER", "name": "👑 MARO EMPOSTER"},
+    {"id": "@MARO_I_M_P_O_S_T_A_R_VIP", "url": "https://t.me/MARO_I_M_P_O_S_T_A_R_VIP", "name": "⭐ MARO VIP"}
+  ],
+  "strings": {
+    "ar": {
+      "welcome": "👋 أهلاً بك في بوت تجهيز المكتبات الفوري!\n\n👑 *كل شيء هنا يعمل بالأزرار وبأقصى سرعة!*",
+      "sub_required": "⚠️ عذراً عزيزي، يجب عليك الاشتراك في قنوات البوت أولاً لتتمكن من استخدامه!",
+      "sub_button": "✅ تم الاشتراك / Verified",
+      "choose_mode": "⚙️ اختر الطريقة التي تريدها للعمل من الأزرار أدناه:",
+      "btn_name": "🔍 البحث باسم المكتبة",
+      "btn_file": "📂 إرسال ملف package.json",
+      "ask_name": "✍️ قم بكتابة اسم المكتبة الآن بدقة (مثال: `telegraf`):",
+      "ask_file": "📂 من فضلك قم بإرسال ملف `package.json` الآن:",
+      "searching": "🔍 جاري البحث وجلب البيانات من NPM...",
+      "not_found": "❌ عذراً، لم يتم العثور على نتائج متطابقة.",
+      "no_result_btn": "🤷‍♂️ لا توجد نتيجة صحيحة؟",
+      "how_to_help": "💡 حاول كتابة اسم المكتبة بشكل أدق، أو يمكنك إرسال ملف `package.json` كاملاً لنقوم بتجميعه لك!",
+      "confirm_lib": "❓ هل هذه هي المكتبة التي تقصدها؟",
+      "choose_ver": "📌 اختر الإصدار المطلوب للمكتبة:",
+      "building": "⏳ جاري تحميل وضغط المكتبة... قد يستغرق الأمر ثوانٍ.",
+      "success": "✅ تم تجهيز ملفاتك بنجاح!\n\n⚠️ سيتم تدمير هذا الملف ذاتياً بعد 3 ساعات.",
+      "btn_yes": "✅ نعم",
+      "btn_no": "❌ لا"
+    },
+    "en": {
+      "welcome": "👋 Welcome to Fast Modules Downloader Bot!\n\n👑 *Everything works with buttons at maximum speed!*",
+      "sub_required": "⚠️ Sorry, you must subscribe to the bot channels first to use it!",
+      "sub_button": "✅ Joined / Verified",
+      "choose_mode": "⚙️ Choose your preferred method from the buttons below:",
+      "btn_name": "🔍 Search by Name",
+      "btn_file": "📂 Upload package.json",
+      "ask_name": "✍️ Type the library name accurately (e.g., `telegraf`):",
+      "ask_file": "📂 Please send your `package.json` file now:",
+      "searching": "🔍 Searching and fetching data from NPM...",
+      "not_found": "❌ Sorry, no matching results found.",
+      "no_result_btn": "🤷‍♂️ No correct result?",
+      "how_to_help": "💡 Try typing the library name more accurately, or send the full `package.json` file for us to build!",
+      "confirm_lib": "❓ Is this the library you are looking for?",
+      "choose_ver": "📌 Choose the required version:",
+      "building": "⏳ Downloading and compressing... Please wait.",
+      "success": "✅ Your files are ready!\n\n⚠️ This file will self-destruct after 3 hours.",
+      "btn_yes": "✅ Yes",
+      "btn_no": "❌ No"
+    },
+    "ru": {
+      "welcome": "👋 Добро пожаловать в бот быстрой загрузки модулей!\n\n👑 *Все работает на кнопках и с максимальной скоростью!*",
+      "sub_required": "⚠️ Извините, сначала нужно подписаться на каналы бота!",
+      "sub_button": "✅ Проверить подписку",
+      "choose_mode": "⚙️ Выберите удобный способ работы с помощью кнопок:",
+      "btn_name": "🔍 Поиск по названию",
+      "btn_file": "📂 Отправить package.json",
+      "ask_name": "✍️ Введите точное название библиотеки (например: `telegraf`):",
+      "ask_file": "📂 Пожалуйста, отправьте файл `package.json` сейчас:",
+      "searching": "🔍 Поиск и получение данных из NPM...",
+      "not_found": "❌ Извините, совпадений не найдено.",
+      "no_result_btn": "🤷‍♂️ Нет правильного результата?",
+      "how_to_help": "💡 Попробуйте ввести название точнее или отправьте полный файл `package.json` для сборки!",
+      "confirm_lib": "❓ Это та библиотека, которую вы искали?",
+      "choose_ver": "📌 Выберите нужную версию:",
+      "building": "⏳ Скачивание и архивация... Пожалуйста, подождите.",
+      "success": "✅ Ваши файлы готовы!\n\n⚠️ Этот файл автоматически удалится через 3 часа.",
+      "btn_yes": "✅ Да",
+      "btn_no": "❌ Нет"
+    }
+  }
+}
